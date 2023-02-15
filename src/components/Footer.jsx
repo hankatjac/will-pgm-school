@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import axios from "axios";
+// import axios from "axios";
 import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
+import http from "../http-common";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -13,7 +14,7 @@ const Footer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/posts`);
+        const res = await http.get(`/posts`);
         setBlogs(res.data);
       } catch (err) {
         console.log(err);
