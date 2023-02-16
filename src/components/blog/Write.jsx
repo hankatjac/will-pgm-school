@@ -1,13 +1,16 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { API_URL } from "../../apiPath";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../contexts/authContext";
 
+
 const Write = () => {
+  axios.defaults.withCredentials = true;
   const [uploadedFileName, setUploadedFileName] = useState(null);
   const inputRef = useRef(null);
   const state = useLocation().state;
@@ -44,7 +47,7 @@ const Write = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await axios.post("/upload", formData);
+      const res = await axios.post(`${API_URL}/upload`, formData);
 
       return res.data;
     } catch (err) {
@@ -54,6 +57,7 @@ const Write = () => {
   };
 
   const handleSubmit = async (e) => {
+    axios.defaults.withCredentials = true;
     e.preventDefault();
     if (inputRef.current.files.length == 0 && !!state == false) {
       setMessage(true);
@@ -69,13 +73,13 @@ const Write = () => {
 
     try {
       state
-        ? await axios.put(`/posts/${state.id}`, {
+        ? await axios.put(`${API_URL}/posts/${state.id}`, {
             title,
             desc: value,
             cat,
             img: file ? imgUrl : state.img,
           })
-        : await axios.post(`/posts/`, {
+        : await axios.post(`${API_URL}/posts/`, {
             title,
             desc: value,
             cat,

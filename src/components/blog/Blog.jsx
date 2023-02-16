@@ -2,10 +2,13 @@ import React, { useState, useEffect} from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Sider from "./Sider";
+import { API_URL } from "../../apiPath";
 
 import { useNavigate } from "react-router-dom";
 
+
 const Blog = () => {
+  axios.defaults.withCredentials = true;
   const nav = useNavigate();
   const [posts, setPosts] = useState([]);
 
@@ -16,7 +19,7 @@ const Blog = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/posts${cat}`);
+        const res = await axios.get(`${API_URL}/posts${cat}`);
         setPosts(res.data);
       } catch (err) {
         console.log(err);
@@ -47,7 +50,7 @@ const Blog = () => {
                   {post.img && (
                     <img
                       className="img-fluid"
-                      src={`/upload/${post.img}`}
+                      src={`${API_URL}/upload/${post.img}`}
                       alt=""
                     />
                   )}

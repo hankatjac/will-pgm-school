@@ -13,7 +13,6 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import { Box } from "@mui/system";
 
-import axios from "axios";
 
 const localizer = momentLocalizer(moment);
 

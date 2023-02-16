@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-// import axios from "axios";
+import axios from "axios";
 import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
-import http from "../http-common";
+import { API_URL } from "../apiPath";
 
 const Footer = () => {
+  axios.defaults.withCredentials = true;
   const { t } = useTranslation();
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await http.get(`/posts`);
+        const res = await axios.get(`${API_URL}/posts`);
         setBlogs(res.data);
       } catch (err) {
         console.log(err);

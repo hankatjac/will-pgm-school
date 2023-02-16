@@ -2,10 +2,12 @@ import React, { useState, useEffect, useContext } from "react";
 import Schedule from "./Schedule";
 import moment from "moment";
 import axios from "axios";
+import { API_URL } from "../../apiPath";
 import { AuthContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
 const Event = () => {
+  axios.defaults.withCredentials = true;
   const nav = useNavigate();
   const { logout } = useContext(AuthContext);
   const [fetch, setfetch] = useState(true);
@@ -39,7 +41,7 @@ const Event = () => {
     if (fetch) {
       const fetchData = async () => {
         try {
-          const res = await axios.get(`/events`);
+          const res = await axios.get(`${API_URL}/events`);
           const originalEvents = res.data;
           setEvents(
             originalEvents.map((appointment) => {
@@ -65,7 +67,7 @@ const Event = () => {
 
   const addEvent = async (appointment) => {
     try {
-      await axios.post(`/events/`, appointment);
+      await axios.post(`${API_URL}/events/`, appointment);
     } catch (err) {
       // setErr(err.response.data);
       alert(err.response.data);
@@ -91,7 +93,7 @@ const Event = () => {
 
   const updateEvent = async (appointment) => {
     try {
-      await axios.put(`/events/${appointment.id}`, appointment);
+      await axios.put(`${API_URL}/events/${appointment.id}`, appointment);
     } catch (err) {
       // setErr(err.response.data);
       alert(err.response.data);
@@ -115,7 +117,7 @@ const Event = () => {
   //  filters out specific event that is to be deleted and set that variable to state
   const deleteEvent = async () => {
     try {
-      await axios.delete(`/events/${clickedEvent.id}`);
+      await axios.delete(`${API_URL}/events/${clickedEvent.id}`);
     } catch (err) {
       // setErr(err.response.data);
       console.log(err);

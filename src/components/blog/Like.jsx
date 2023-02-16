@@ -1,15 +1,16 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { API_URL } from "../../apiPath";
 
 const Like = ({ cat, id }) => {
- 
+  axios.defaults.withCredentials = true;
   const [filterPost, setFilterPost] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/posts/?cat=${cat}`);
+        const res = await axios.get(`${API_URL}/posts/?cat=${cat}`);
         let posts = res.data
         setFilterPost(
           posts.filter(post => 

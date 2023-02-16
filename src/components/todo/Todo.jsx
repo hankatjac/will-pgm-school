@@ -3,10 +3,12 @@ import Header from "./Header";
 import Tasks from "./Tasks";
 import AddTask from "./AddTask";
 import axios from "axios";
+import { API_URL } from "../../apiPath";
 import { AuthContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
 const Todo = () => {
+  axios.defaults.withCredentials = true;
   const nav = useNavigate();
   const { logout } = useContext(AuthContext);
   const [showAddTask, setShowAddTask] = useState(false);
@@ -46,7 +48,7 @@ const Todo = () => {
     if (fetch) {
       const fetchData = async () => {
         try {
-          const res = await axios.get(`/todos`);
+          const res = await axios.get(`${API_URL}/todos`);
           setTasks(res.data);
         } catch (err) {
           // setErr(err.response.data);
@@ -80,7 +82,7 @@ const Todo = () => {
   // Add Task
   const addTask = async (task) => {
     try {
-      await axios.post(`/todos/`, task);
+      await axios.post(`${API_URL}/todos/`, task);
     } catch (err) {
       // setErr(err.response.data);
       alert(err.response.data);
@@ -101,7 +103,7 @@ const Todo = () => {
   const toggleReminder = async (task) => {
     const updTask = { ...task, reminder: !task.reminder };
     try {
-      await axios.put(`/todos/${task.id}`, updTask);
+      await axios.put(`${API_URL}/todos/${task.id}`, updTask);
     } catch (err) {
       // setErr(err.response.data);
       alert(err.response.data);
@@ -138,7 +140,7 @@ const Todo = () => {
   const handleEditTask2 = async (task) => {
     console.log(task.text);
     try {
-      await axios.put(`/todos/${task.id}`, task);
+      await axios.put(`${API_URL}/todos/${task.id}`, task);
     } catch (err) {
       // setErr(err.response.data);
       alert(err.response.data);
@@ -160,7 +162,7 @@ const Todo = () => {
   // Delete Task
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`/todos/${id}`);
+      await axios.delete(`${API_URL}/todos/${id}`);
     } catch (err) {
       // setErr(err.response.data);
       alert(err.response.data);

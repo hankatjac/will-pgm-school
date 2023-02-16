@@ -8,8 +8,10 @@ import moment from "moment";
 import DOMPurify from "dompurify";
 import Sider from "./Sider";
 import { AuthContext } from "../../contexts/authContext";
+import { API_URL } from "../../apiPath";
 
 const Single = () => {
+  axios.defaults.withCredentials = true;
   const { id } = useParams();
   const [post, setPost] = useState({});
   const [readMore, setReadMore] = useState(false);
@@ -26,7 +28,7 @@ const Single = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/posts/${id}`);
+        const res = await axios.get(`${API_URL}/posts/${id}`);
         setPost(res.data);
       } catch (err) {
         console.log(err);
@@ -38,7 +40,7 @@ const Single = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`/posts/${id}`);
+      await axios.delete(`${API_URL}/posts/${id}`);
       navigate("/posts");
     } catch (err) {
       console.log(err);
