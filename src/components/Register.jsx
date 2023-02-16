@@ -6,7 +6,7 @@ import { API_URL } from "../apiPath";
 import axios from "axios";
 
 const Register = () => {
-  axios.defaults.withCredentials = true;
+  
   const { t } = useTranslation();
   const navigate = useNavigate();
 

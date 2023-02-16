@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 
 const Blog = () => {
-  axios.defaults.withCredentials = true;
+  
   const nav = useNavigate();
   const [posts, setPosts] = useState([]);
 

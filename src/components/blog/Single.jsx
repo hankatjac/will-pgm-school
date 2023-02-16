@@ -11,7 +11,7 @@ import { AuthContext } from "../../contexts/authContext";
 import { API_URL } from "../../apiPath";
 
 const Single = () => {
-  axios.defaults.withCredentials = true;
+  
   const { id } = useParams();
   const [post, setPost] = useState({});
   const [readMore, setReadMore] = useState(false);

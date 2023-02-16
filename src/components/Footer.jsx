@@ -8,7 +8,7 @@ import { FaGoogle } from "react-icons/fa";
 import { API_URL } from "../apiPath";
 
 const Footer = () => {
-  axios.defaults.withCredentials = true;
+  
   const { t } = useTranslation();
   const [blogs, setBlogs] = useState([]);
 

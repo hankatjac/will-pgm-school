@@ -7,7 +7,7 @@ import { AuthContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
 const Event = () => {
-  axios.defaults.withCredentials = true;
+  
   const nav = useNavigate();
   const { logout } = useContext(AuthContext);
   const [fetch, setfetch] = useState(true);

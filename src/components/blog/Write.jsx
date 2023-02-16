@@ -10,7 +10,7 @@ import { AuthContext } from "../../contexts/authContext";
 
 
 const Write = () => {
-  axios.defaults.withCredentials = true;
+  
   const [uploadedFileName, setUploadedFileName] = useState(null);
   const inputRef = useRef(null);
   const state = useLocation().state;
@@ -57,7 +57,7 @@ const Write = () => {
   };
 
   const handleSubmit = async (e) => {
-    axios.defaults.withCredentials = true;
+    
     e.preventDefault();
     if (inputRef.current.files.length == 0 && !!state == false) {
       setMessage(true);

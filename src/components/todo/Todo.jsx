@@ -8,7 +8,7 @@ import { AuthContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
 
 const Todo = () => {
-  axios.defaults.withCredentials = true;
+  
   const nav = useNavigate();
   const { logout } = useContext(AuthContext);
   const [showAddTask, setShowAddTask] = useState(false);

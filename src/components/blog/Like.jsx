@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { API_URL } from "../../apiPath";
 
 const Like = ({ cat, id }) => {
-  axios.defaults.withCredentials = true;
+  
   const [filterPost, setFilterPost] = useState([]);
 
   useEffect(() => {
