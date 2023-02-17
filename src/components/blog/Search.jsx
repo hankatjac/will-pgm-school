@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../apiPath";
 import Sider from "./Sider";
 
 const Search = () => {
@@ -15,7 +16,7 @@ const Search = () => {
     const fetchData = async () => {
       let tempPosts = [];
       try {
-        const res = await axios.get("/posts");
+        const res = await axios.get(`${API_URL}/posts`);
 
         // res.data.forEach((post) => {
         //   // console.log(typeof post.desc);

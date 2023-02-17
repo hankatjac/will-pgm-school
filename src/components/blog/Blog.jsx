@@ -50,7 +50,7 @@ const Blog = () => {
                   {post.img && (
                     <img
                       className="img-fluid"
-                      src={`${API_URL}/upload/${post.img}`}
+                      src={`https://odd-puce-turtle-tutu.cyclic.app/${post.img}`}
                       alt=""
                     />
                   )}
