@@ -142,6 +142,7 @@ const Write = () => {
                   onChange={handleDisplayFileDetails}
                   className="d-none"
                   type="file"
+                  accept="image/*"
                 />
 
                 <button

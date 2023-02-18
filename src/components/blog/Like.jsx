@@ -34,7 +34,7 @@ const Like = ({ cat, id }) => {
             {post.img && (
               <img
                 className="img-fluid"
-                src={`../upload/${post?.img}`}
+                src={`${API_URL}/pictures/${post?.img}`}
                 alt=""
               />
             )}
