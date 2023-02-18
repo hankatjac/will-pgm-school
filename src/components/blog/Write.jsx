@@ -46,7 +46,7 @@ const Write = () => {
   const upload = async () => {
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("photo", file);
       const res = await axios.post(`${API_URL}/upload`, formData);
 
       return res.data;
