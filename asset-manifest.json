@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/will-pgm-school/static/css/main.6ec23b27.css",
-    "main.js": "/will-pgm-school/static/js/main.234244f4.js",
+    "main.js": "/will-pgm-school/static/js/main.7dd7d06c.js",
     "static/media/childrens-education-1920x1080.jpg": "/will-pgm-school/static/media/childrens-education-1920x1080.16497d9f9e3f73f990d1.jpg",
     "static/media/hero-bg.jpg": "/will-pgm-school/static/media/hero-bg.8947f2200e2804d08f4d.jpg",
     "index.html": "/will-pgm-school/index.html",
     "main.6ec23b27.css.map": "/will-pgm-school/static/css/main.6ec23b27.css.map",
-    "main.234244f4.js.map": "/will-pgm-school/static/js/main.234244f4.js.map"
+    "main.7dd7d06c.js.map": "/will-pgm-school/static/js/main.7dd7d06c.js.map"
   },
   "entrypoints": [
     "static/css/main.6ec23b27.css",
-    "static/js/main.234244f4.js"
+    "static/js/main.7dd7d06c.js"
   ]
 }
