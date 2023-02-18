@@ -1,9 +1,9 @@
-import React , {useContext} from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslation } from "react-i18next";
-import { AuthContext} from "../contexts/authContext";
+import { AuthContext } from "../contexts/authContext";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -33,7 +33,7 @@ const Menu = () => {
               <Nav.Link as={Link} eventKey="2" to="event">
                 {t("event")}
               </Nav.Link>
-         
+
               <Nav.Link as={Link} eventKey="3" to="posts">
                 {t("news")}
               </Nav.Link>
@@ -44,26 +44,28 @@ const Menu = () => {
               <Nav.Link as={Link} eventKey="5" to="contact">
                 {t("contact")}
               </Nav.Link>
-
-
             </Nav>
 
             <Nav>
-            <Nav.Link className="text-capitalize">{currentUser?.username}</Nav.Link>
-            {currentUser ? (
-              <Nav.Link eventKey={1} as={Link} to="/" onClick={logout}>
-                Logout
+              <Nav.Link className="text-capitalize">
+                {currentUser?.username}
               </Nav.Link>
-            ) : (
-              <Nav.Link eventKey={1} as={Link} to="/login">
-                Login
-              </Nav.Link>
-            )}
+              {currentUser ? (
+                <Nav.Link eventKey={1} as={Link} to="/" onClick={logout}>
+                  Logout
+                </Nav.Link>
+              ) : (
+                <Nav.Link eventKey={1} as={Link} to="/login">
+                  Login
+                </Nav.Link>
+              )}
 
-            <Nav.Link eventKey={2} as={Link} to="/register">
-              Register
-            </Nav.Link>
-          </Nav>
+              {!currentUser && (
+                <Nav.Link eventKey={2} as={Link} to="/register">
+                  Register
+                </Nav.Link>
+              )}
+            </Nav>
 
             <Nav>
               <Nav.Link eventKey="10">

@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <section id="login" className="w-25 mx-auto py-5"  >
+    <section id="login" className="container col col-md-5 py-5">
       <div className="text-center">
         <h1 className="fw-bolder text-capitalize">{t("login")}</h1>
         <img src={avatar} alt="profile-img" className="profile-img-card" />

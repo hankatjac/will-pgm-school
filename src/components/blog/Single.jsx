@@ -82,7 +82,7 @@ const Single = () => {
           <h1>{post.title}</h1>
           <div>
             {post.img && (
-              <img className="img-fluid" src={`/upload/${post?.img}`} alt="" />
+              <img className="img-fluid" src={`${API_URL}/pictures/${post?.img}`} alt="" />
             )}
           </div>
 
