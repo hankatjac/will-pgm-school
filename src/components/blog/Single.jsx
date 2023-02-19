@@ -62,7 +62,7 @@ const Single = () => {
         <div className="col-md-9">
           <div className="user">
             <div className="info">
-              <span>{post.username}</span>
+              <span className="text-capitalize">{post.username}</span>
               <p>Posted {moment(post.date).fromNow()}</p>
             </div>
             {currentUser?.username === post.username && (
@@ -93,7 +93,7 @@ const Single = () => {
               }}
             ></p>
           ) : (
-            `${getText(post.desc).substring(0, 200)}...`
+            `${getText(post.desc).substring(0, 500)}...`
           )}
           <div>
             <button onClick={() => setReadMore(!readMore)}>

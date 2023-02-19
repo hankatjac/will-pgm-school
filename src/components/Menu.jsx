@@ -24,8 +24,8 @@ const Menu = () => {
         <Container>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto text-capitalize">
+          <Navbar.Collapse id="responsive-navbar-nav" className="text-capitalize fs-6">
+            <Nav className="me-auto">
               <Nav.Link as={Link} eventKey="1" to="/">
                 {t("home")}
               </Nav.Link>
@@ -47,7 +47,7 @@ const Menu = () => {
             </Nav>
 
             <Nav>
-              <Nav.Link className="text-capitalize">
+              <Nav.Link>
                 {currentUser?.username}
               </Nav.Link>
               {currentUser ? (

@@ -127,7 +127,7 @@ const Footer = () => {
                 <Link to={"todo"}>todo list</Link>
               </li>
               <li>
-                <a href="#">yahtzee game</a>
+              <Link to={"recipe"}>recipe</Link>
               </li>
             </ul>
           </div>

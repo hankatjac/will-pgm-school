@@ -15,6 +15,8 @@ import Single from "./components/blog/Single";
 import Search from "./components/blog/Search";
 import WorkingHours from "./components/WorkingHours";
 import Todo from "./components/todo/Todo";
+import FoodRecipe from "./components/recipe/FoodRecipe";
+import Recipe from "./components/recipe/Recipe";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -34,7 +36,8 @@ function App() {
           <Route path="posts/:id" element={<Single />} />
           <Route path="working-hours" element={<WorkingHours/>} />
           <Route path="todo" element={<Todo/>} />
-
+          <Route path="recipe" element={<FoodRecipe/>} />
+          <Route path="recipe/:id" element={<Recipe/>} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

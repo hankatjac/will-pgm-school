@@ -5,6 +5,7 @@ import { AuthContextProvider } from './contexts/authContext';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/css/style.scss";
 import "./i18n";
+import "react-widgets/scss/styles.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
