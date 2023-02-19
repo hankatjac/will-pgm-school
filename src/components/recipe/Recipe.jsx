@@ -27,26 +27,27 @@ const Recipe = () => {
   console.log(activeRecipe.ingredients);
 
   return (
-    <div className="container">
-      <div className="active-recipe">
+    <div className="container col-12 col-md-6">
+      <div className="text-center">
         <img
-          className="active-recipe__img"
+          className="img-fluid"
           src={activeRecipe.image_url}
           alt={activeRecipe.title}
         />
-
         <h3 className="active-recipe__title">{activeRecipe.title}</h3>
-        {/* <p className="active-recipe__title">{activeRecipe.ingredients}</p> */}
+      </div>
+      <div className="mx-auto w-75">
+        <p>Ingredients</p>
         <ul>
           {activeRecipe.ingredients &&
             activeRecipe["ingredients"].map((prop, index) => (
               <li key={index}> {prop}</li>
             ))}
         </ul>
-        <h4 className="active-recipe__publisher">
+        <p>
           Publisher: <span>{activeRecipe.publisher}</span>
-        </h4>
-        <p className="active-recipe__website">
+        </p>
+        <p>
           Website:
           <span>
             <a href={activeRecipe.publisher_url}>
