@@ -11,7 +11,6 @@ import { AuthContext } from "../../contexts/authContext";
 import { API_URL } from "../../apiPath";
 
 const Single = () => {
-  
   const { id } = useParams();
   const [post, setPost] = useState({});
   const [readMore, setReadMore] = useState(false);
@@ -38,6 +37,15 @@ const Single = () => {
     fetchData();
   }, [id]);
 
+  const deletePostImage = async () => {
+    try {
+      await axios.delete(`${API_URL}/pictures/${post.img}`);
+    } catch (err) {
+      console.log(err);
+      alert(err.response.data);
+    }
+  };
+
   const handleDelete = async () => {
     try {
       await axios.delete(`${API_URL}/posts/${id}`);
@@ -48,7 +56,10 @@ const Single = () => {
         logout();
         nav("/login");
       }
+      return
     }
+
+    deletePostImage();
   };
 
   const getText = (html) => {
@@ -82,7 +93,11 @@ const Single = () => {
           <h1>{post.title}</h1>
           <div>
             {post.img && (
-              <img className="img-fluid" src={`${API_URL}/pictures/${post?.img}`} alt="" />
+              <img
+                className="img-fluid"
+                src={`${API_URL}/pictures/${post?.img}`}
+                alt=""
+              />
             )}
           </div>
 

@@ -108,7 +108,7 @@ const Write = () => {
         <h1 className="text-center">wirte a blog</h1>
         <Form onSubmit={handleSubmit}>
           <div className="row">
-            <div className="col-md-9">
+            <div className="col-md-9 mb-5">
               <input
                 className="mb-4 w-100"
                 type="text"
@@ -118,7 +118,7 @@ const Write = () => {
                 required
               />
 
-              <ReactQuill theme="snow" value={value} onChange={setValue} />
+              <ReactQuill style={{'height':'300px'}} theme="snow" value={value} onChange={setValue} />
 
               {MessageQuill && (
                 <div className="bg-danger text-center m-auto w-25">
@@ -127,7 +127,7 @@ const Write = () => {
               )}
             </div>
 
-            <div className="col-md-3 ">
+            <div className="col-md-3">
               {/* <span>
               <b>Status: </b> Draft
               </span>
@@ -135,7 +135,7 @@ const Write = () => {
               <b>Visibility: </b> Public
               </span> */}
 
-              <div className="m-3">
+              <div >
                 <label className="mx-3">Choose file: </label>
                 <input
                   ref={inputRef}
@@ -169,7 +169,7 @@ const Write = () => {
               </label> */}
               </div>
 
-              <div className="m-3">
+              <div>
                 <label className="mx-3">Choose a category: </label>
                 {/* <h1> choose a category</h1> */}
 
@@ -216,7 +216,7 @@ const Write = () => {
               </div>
               <div className="buttons">
                 {/* <button>Save as a draft</button> */}
-                <button type="submit">Publish</button>
+                <button type="submit" className="btn btn-primary">Publish</button>
                 {/* {err && <div className="bg-danger text-center">{err}</div>} */}
               </div>
             </div>
