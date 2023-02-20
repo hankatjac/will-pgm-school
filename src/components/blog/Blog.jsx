@@ -40,7 +40,7 @@ const Blog = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-9">
-            {posts.map((post) => (
+            {posts.slice().reverse().map((post) => (
               <div key={post.id} className="card mb-4">
                 <Link
                   className="text-muted text-decoration-none"

@@ -31,7 +31,7 @@ const Footer = () => {
           <div className="col-md-3">
             <h3>Latest posts</h3>
             <ul className="posts">
-              {blogs.slice(0, 3).map((post) => {
+              {blogs.slice(-3).reverse().map((post) => {
                 return (
                   <li key={post.id}>
                     <Link to={`/posts/${post.id}`}>{post.title}</Link>

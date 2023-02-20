@@ -22,6 +22,7 @@ const Menu = () => {
       </header>
       <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
         <Container>
+        <Navbar.Brand></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
           <Navbar.Collapse id="responsive-navbar-nav" className="text-capitalize fs-6">
