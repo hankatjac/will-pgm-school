@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import CookieConsent from "react-cookie-consent";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -63,6 +64,7 @@ const Home = () => {
             </Link>
           </div>
         </div>
+        <CookieConsent>This website uses cookies to enhance the user experience.</CookieConsent>
       </section>
     </>
   );
