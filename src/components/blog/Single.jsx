@@ -1,6 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import Edit from "../../assets/img/logos/edit.png";
-import Delete from "../../assets/img/logos/delete.png";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Like from "./Like";
 import axios from "axios";
@@ -9,6 +7,8 @@ import DOMPurify from "dompurify";
 import Sider from "./Sider";
 import { AuthContext } from "../../contexts/authContext";
 import { API_URL } from "../../apiPath";
+import { MdDelete } from "react-icons/md";
+import { GrEdit } from "react-icons/gr";
 
 const Single = () => {
   const { id } = useParams();
@@ -56,7 +56,7 @@ const Single = () => {
         logout();
         nav("/login");
       }
-      return
+      return;
     }
 
     deletePostImage();
@@ -77,15 +77,29 @@ const Single = () => {
               <p>Posted {moment(post.date).fromNow()}</p>
             </div>
             {currentUser?.username === post.username && (
-              <div className="edit">
-                <Link to={`/posts/write?edit=${id}`} state={post}>
-                  <img src={Edit} alt="" />
-                </Link>
-                <img
+              <div>
+                <Link
+                  className="me-3"
+                  to={`/posts/write?edit=${id}`}
+                  state={post}
+                >
+                  <GrEdit
+                    style={{
+                      color: "blue",
+                      cursor: "pointer",
+                      width: "30px",
+                      height: "30px",
+                    }}
+                  />
+                </Link>{" "}
+                <MdDelete
+                  style={{
+                    color: "red",
+                    cursor: "pointer",
+                    width: "30px",
+                    height: "30px",
+                  }}
                   onClick={handleDelete}
-                  style={{ cursor: "pointer" }}
-                  src={Delete}
-                  alt=""
                 />
               </div>
             )}

@@ -56,7 +56,7 @@ const Recipe = () => {
           </span>
         </p>
         <div className="text-center">
-          <Link className="btn btn-outline-primary" to="/recipe">
+          <Link className="btn btn-outline-primary mb-5" to="/recipe">
             Change Recipe
           </Link>
         </div>

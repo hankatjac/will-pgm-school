@@ -119,15 +119,15 @@ const Footer = () => {
 
           <div className="col-md-3">
             <h3>Useful Tools</h3>
-            <ul className="posts">
+            <ul className="posts text-wrap">
               <li>
-                <Link to={"working-hours"}>weekly working hours</Link>
+                <Link to={"working-hours"} >weekly working-hours calculator</Link>
               </li>
               <li>
                 <Link to={"todo"}>todo list</Link>
               </li>
               <li>
-              <Link to={"recipe"}>recipe</Link>
+              <Link to={"recipe"}>food recipe</Link>
               </li>
             </ul>
           </div>

@@ -36,7 +36,7 @@ const FoodRecipe = () => {
   console.log(recipes);
 
   return (
-    <section>
+    <section >
       <header className="recipe-header">
         <h1 className="recipe-title">Recipe Search</h1>
       </header>

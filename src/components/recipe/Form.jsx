@@ -137,7 +137,7 @@ const Form = ({ getRecipe }) => (
         "ribs",
       ]}
     />
-    <button className="form_button ">Search</button>
+    <button className="form_button mb-3">Search</button>
   </form>
 );
 
