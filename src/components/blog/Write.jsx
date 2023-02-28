@@ -8,9 +8,7 @@ import moment from "moment";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../contexts/authContext";
 
-
 const Write = () => {
-  
   const [uploadedFileName, setUploadedFileName] = useState(null);
   const inputRef = useRef(null);
   const state = useLocation().state;
@@ -23,8 +21,8 @@ const Write = () => {
 
   // const [err, setError] = useState(null);
 
-  const [MessageQuill, setMessageQuill] = useState(false);
-  const [Message, setMessage] = useState(false);
+  const [messageQuill, setMessageQuill] = useState(false);
+  const [message, setMessage] = useState(false);
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
 
@@ -34,7 +32,6 @@ const Write = () => {
     else {
       setFile(inputRef.current.files[0]);
       setUploadedFileName(inputRef.current.files[0].name);
-      setMessage(false);
     }
   };
 
@@ -48,7 +45,6 @@ const Write = () => {
       const formData = new FormData();
       formData.append("photo", file);
       const res = await axios.post(`${API_URL}/upload`, formData);
-
       return res.data;
     } catch (err) {
       console.log(err);
@@ -57,7 +53,6 @@ const Write = () => {
   };
 
   const handleSubmit = async (e) => {
-    
     e.preventDefault();
     if (inputRef.current.files.length == 0 && !!state == false) {
       setMessage(true);
@@ -89,6 +84,7 @@ const Write = () => {
 
       setMessage(false);
       setMessageQuill(false);
+      navigate("/posts");
     } catch (err) {
       // setError(err.response.data);
       alert(err.response.data);
@@ -97,9 +93,7 @@ const Write = () => {
         navigate("/login");
       }
       console.log(err);
-      return
     }
-    navigate("/posts");
   };
 
   return (
@@ -118,9 +112,14 @@ const Write = () => {
                 required
               />
 
-              <ReactQuill style={{'height':'300px'}} theme="snow" value={value} onChange={setValue} />
+              <ReactQuill
+                style={{ height: "300px" }}
+                theme="snow"
+                value={value}
+                onChange={setValue}
+              />
 
-              {MessageQuill && (
+              {messageQuill && (
                 <div className="bg-danger text-center m-auto w-25">
                   Please write some texts
                 </div>
@@ -135,7 +134,7 @@ const Write = () => {
               <b>Visibility: </b> Public
               </span> */}
 
-              <div >
+              <div>
                 <label className="mx-3">Choose file: </label>
                 <input
                   ref={inputRef}
@@ -153,7 +152,7 @@ const Write = () => {
                 >
                   {uploadedFileName ? uploadedFileName : "Upload"}
                 </button>
-                {Message && (
+                {message && (
                   <div className="bg-danger">Please upload a picture</div>
                 )}
 
@@ -216,7 +215,9 @@ const Write = () => {
               </div>
               <div className="buttons">
                 {/* <button>Save as a draft</button> */}
-                <button type="submit" className="btn btn-primary">Publish</button>
+                <button type="submit" className="btn btn-primary">
+                  Publish
+                </button>
                 {/* {err && <div className="bg-danger text-center">{err}</div>} */}
               </div>
             </div>

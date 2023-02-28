@@ -122,7 +122,12 @@ const Single = () => {
               }}
             ></p>
           ) : (
-            `${getText(post.desc).substring(0, 500)}...`
+            <p
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(post.desc?.substring(0, 500)),
+              }}
+            ></p>
+            // `${getText(post.desc).substring(0, 500)}...`
           )}
           <div>
             <button onClick={() => setReadMore(!readMore)}>
