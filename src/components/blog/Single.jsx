@@ -12,7 +12,7 @@ import { GrEdit } from "react-icons/gr";
 
 const Single = () => {
   const { id } = useParams();
-  const [post, setPost] = useState({});
+  // const [post, setPost] = useState({});
   const [readMore, setReadMore] = useState(false);
   const nav = useNavigate();
   // const location = useLocation();
@@ -23,27 +23,20 @@ const Single = () => {
   console.log(id);
   const { currentUser, logout, deletePostImage } = useContext(AuthContext);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(`${API_URL}/posts/${id}`);
-        setPost(res.data);
-      } catch (err) {
-        console.log(err);
-        alert(err.response.data);
-      }
-    };
-    fetchData();
-  }, [id]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(`${API_URL}/posts/${id}`);
+  //       setPost(res.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //       alert(err.response.data);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [id]);
 
-  // const deletePostImage = async () => {
-  //   try {
-  //     await axios.delete(`${API_URL}/pictures/${post.img}`);
-  //   } catch (err) {
-  //     console.log(err);
-  //     alert(err.response.data);
-  //   }
-  // };
+  const post = useLocation().state;
 
   const handleDelete = async () => {
     try {
@@ -59,11 +52,6 @@ const Single = () => {
     }
 
     deletePostImage(post.img);
-  };
-
-  const getText = (html) => {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent;
   };
 
   return (

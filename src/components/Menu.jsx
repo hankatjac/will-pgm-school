@@ -36,7 +36,7 @@ const Menu = () => {
               </Nav.Link>
 
               <Nav.Link as={Link} eventKey="3" to="posts">
-                {t("news")}
+                {t("posts")}
               </Nav.Link>
               <Nav.Link as={Link} eventKey="4" to="about">
                 {t("about")}

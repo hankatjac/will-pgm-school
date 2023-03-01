@@ -3,6 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../apiPath";
 import Sider from "./Sider";
+import { ProgressBar } from "react-loader-spinner";
+import DOMPurify from "dompurify";
 
 const Search = () => {
   const location = useLocation();
@@ -11,8 +13,10 @@ const Search = () => {
   // console.log(typeof from);
 
   const [searchedPosts, setSearchedPost] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       let tempPosts = [];
       try {
@@ -26,13 +30,17 @@ const Search = () => {
         // });
 
         tempPosts = res.data.filter(
-          (post) => post.title.toLowerCase().includes(from) || post.desc.toLowerCase().includes(from)
+          (post) =>
+            post.title.toLowerCase().includes(from) ||
+            post.desc.toLowerCase().includes(from)
         );
 
         setSearchedPost(tempPosts);
+        setLoading(false);
       } catch (err) {
         console.log(err);
         alert(err.response.data);
+        setLoading(false);
       }
     };
     fetchData();
@@ -40,34 +48,49 @@ const Search = () => {
 
   console.log(searchedPosts);
 
-  const getText = (html) => {
-    const doc = new DOMParser().parseFromString(html, "text/html");
-    return doc.body.textContent;
-  };
-
   return (
     <section className="overflow-hidden pt-4">
       <div className="container">
         <div className="row">
           <div className="col-md-9">
-            {searchedPosts.map((post) => (
-              <div key={post.id} className="card mb-4">
-                <Link
-                  className="text-muted text-decoration-none"
-                  to={`/posts/${post.id}`}
-                >
-                  <h1>{post.title}</h1>
-                  {post.img && (
-                    <img
-                      className="img-fluid"
-                      src={`${API_URL}/pictures/${post.img}`}
-                      alt=""
-                    />
-                  )}
-                </Link>
-                <p>{getText(post.desc).substring(0, 200)}</p>
-              </div>
-            ))}
+            {loading ? (
+              <ProgressBar
+                height="80"
+                width="100%"
+                ariaLabel="progress-bar-loading"
+                wrapperStyle={{}}
+                wrapperClass="progress-bar-wrapper"
+                borderColor="#F4442E"
+                barColor="#51E5FF"
+              />
+            ) : (
+              searchedPosts.map((post) => (
+                <div key={post.id} className="card mb-4">
+                  <Link
+                    className="text-muted text-decoration-none"
+                    to={`/posts/${post.id}`}
+                    state={post}
+                  >
+                    <h1>{post.title}</h1>
+                    {post.img && (
+                      <img
+                        className="img-fluid"
+                        src={`${API_URL}/pictures/${post.img}`}
+                        alt=""
+                      />
+                    )}
+                  </Link>
+                  <p
+                      dangerouslySetInnerHTML={{
+                        __html: DOMPurify.sanitize(
+                          post.desc?.substring(0, 200)
+                        ),
+                      }}
+                    ></p>
+                  {/* <p>{getText(post.desc).substring(0, 200)}</p> */}
+                </div>
+              ))
+            )}
           </div>
           <div className="col-md-3 ms-auto">
             <Sider />

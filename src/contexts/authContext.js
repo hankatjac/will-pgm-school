@@ -31,7 +31,11 @@ export const AuthContextProvider = ({ children }) => {
       alert(err.response.data);
     }
   };
-
+  
+  const getText = (html) => {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    return doc.body.textContent;
+  };
 
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
