@@ -22,12 +22,23 @@ export const AuthContextProvider = ({ children }) => {
     setCurrentUser(null);
   };
 
+
+  const deletePostImage = async (filename) => {
+    try {
+      await axios.delete(`${API_URL}/pictures/${filename}`);
+    } catch (err) {
+      console.log(err);
+      alert(err.response.data);
+    }
+  };
+
+
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(currentUser));
   }, [currentUser]);
 
   return (
-    <AuthContext.Provider value={{ currentUser, login, logout }}>
+    <AuthContext.Provider value={{ currentUser, login, logout, deletePostImage }}>
       {children}
     </AuthContext.Provider>
   );

@@ -15,14 +15,13 @@ const Single = () => {
   const [post, setPost] = useState({});
   const [readMore, setReadMore] = useState(false);
   const nav = useNavigate();
-  const { logout } = useContext(AuthContext);
   // const location = useLocation();
   const navigate = useNavigate();
 
   // const postId = location.pathname.split("/")[2];
   // console.log(location.pathname.split("/"))
   console.log(id);
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, logout, deletePostImage } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,14 +36,14 @@ const Single = () => {
     fetchData();
   }, [id]);
 
-  const deletePostImage = async () => {
-    try {
-      await axios.delete(`${API_URL}/pictures/${post.img}`);
-    } catch (err) {
-      console.log(err);
-      alert(err.response.data);
-    }
-  };
+  // const deletePostImage = async () => {
+  //   try {
+  //     await axios.delete(`${API_URL}/pictures/${post.img}`);
+  //   } catch (err) {
+  //     console.log(err);
+  //     alert(err.response.data);
+  //   }
+  // };
 
   const handleDelete = async () => {
     try {
@@ -59,7 +58,7 @@ const Single = () => {
       return;
     }
 
-    deletePostImage();
+    deletePostImage(post.img);
   };
 
   const getText = (html) => {

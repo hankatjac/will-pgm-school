@@ -24,7 +24,7 @@ const Write = () => {
   const [messageQuill, setMessageQuill] = useState(false);
   const [message, setMessage] = useState(false);
   const navigate = useNavigate();
-  const { logout } = useContext(AuthContext);
+  const { logout, deletePostImage } = useContext(AuthContext);
 
   const handleDisplayFileDetails = () => {
     if (inputRef.current.files[0].size > 3 * 1024 * 1024)
@@ -67,21 +67,23 @@ const Write = () => {
     const imgUrl = await upload();
 
     try {
-      state
-        ? await axios.put(`${API_URL}/posts/${state.id}`, {
-            title,
-            desc: value,
-            cat,
-            img: file ? imgUrl : state.img,
-          })
-        : await axios.post(`${API_URL}/posts/`, {
-            title,
-            desc: value,
-            cat,
-            img: file ? imgUrl : "",
-            date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
-          });
-
+      if (state) {
+        await axios.put(`${API_URL}/posts/${state.id}`, {
+          title,
+          desc: value,
+          cat,
+          img: file ? imgUrl : state.img,
+        });
+        file && deletePostImage(state.img);
+      } else {
+        await axios.post(`${API_URL}/posts/`, {
+          title,
+          desc: value,
+          cat,
+          img: file ? imgUrl : "",
+          date: moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
+        });
+      }
       setMessage(false);
       setMessageQuill(false);
       navigate("/posts");

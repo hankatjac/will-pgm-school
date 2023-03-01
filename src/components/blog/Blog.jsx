@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 import Sider from "./Sider";
 import { API_URL } from "../../apiPath";
+import DOMPurify from "dompurify";
 
 // import { useNavigate } from "react-router-dom";
 
