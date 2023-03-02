@@ -6,21 +6,20 @@ import { ProgressBar } from "react-loader-spinner";
 
 const Like = ({ cat, id }) => {
   const [filterPost, setFilterPost] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     const fetchData = async () => {
       try {
         const res = await axios.get(`${API_URL}/posts/?cat=${cat}`);
         let posts = res.data;
         setFilterPost(posts.filter((post) => post.id != id));
-        setLoading(false);
       } catch (err) {
-        setLoading(false);
         console.log(err);
         alert(err.response.data);
       }
+      setIsLoading(false);
     };
     fetchData();
   }, [cat, id]);
@@ -29,7 +28,7 @@ const Like = ({ cat, id }) => {
     <div className="card mb-4">
       <div className="card-body">
         <h4 className="card-title">Similar Post</h4>
-        {loading ? (
+        {isLoading ? (
           <ProgressBar
             height="80"
             width="100%"

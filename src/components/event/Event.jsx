@@ -5,9 +5,10 @@ import axios from "axios";
 import { API_URL } from "../../apiPath";
 import { AuthContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
+import { ProgressBar } from "react-loader-spinner";
 
 const Event = () => {
-  
+  const [isLoading, setIsLoading] = useState(false);
   const nav = useNavigate();
   const { logout } = useContext(AuthContext);
   const [fetch, setfetch] = useState(true);
@@ -38,6 +39,7 @@ const Event = () => {
   ]);
 
   useEffect(() => {
+    setIsLoading(true);
     if (fetch) {
       const fetchData = async () => {
         try {
@@ -58,8 +60,8 @@ const Event = () => {
           console.log(err);
           return;
         }
-
         setfetch(false);
+        setIsLoading(false);
       };
       fetchData();
     }
@@ -76,7 +78,6 @@ const Event = () => {
         logout();
         nav("/login");
       }
-      return;
     }
     setfetch(true);
     // console.log("appointment", appointment);
@@ -139,28 +140,39 @@ const Event = () => {
       <div className="row">
         <h1 className="text-center fw-bolder">Upcoming events</h1>
         <div id="main" className="col-12 col-md-5 pt-5">
-          {events.map((event, index) => {
-            const { title, desc, start, end } = event;
-
-            return (
-              <div key={index}>
-                {" "}
-                <h2>
-                  <a href="#">{title}</a>
-                </h2>
-                <div className="metadata">
-                  <time>
-                    Start{" "}
-                    <span>{moment(start).format("YYYY-MM-DD HH:mm")}</span>
-                  </time>{" "}
-                  <time>
-                    End <span>{moment(end).format("YYYY-MM-DD HH:mm")}</span>
-                  </time>
+          {isLoading ? (
+            <ProgressBar
+              height="80"
+              width="100%"
+              ariaLabel="progress-bar-loading"
+              wrapperStyle={{}}
+              wrapperClass="progress-bar-wrapper"
+              borderColor="#F4442E"
+              barColor="#51E5FF"
+            />
+          ) : (
+            events.map((event, index) => {
+              const { title, desc, start, end } = event;
+              return (
+                <div key={index}>
+                  {" "}
+                  <h2>
+                    <a href="#">{title}</a>
+                  </h2>
+                  <div className="metadata">
+                    <time>
+                      Start{" "}
+                      <span>{moment(start).format("YYYY-MM-DD HH:mm")}</span>
+                    </time>{" "}
+                    <time>
+                      End <span>{moment(end).format("YYYY-MM-DD HH:mm")}</span>
+                    </time>
+                  </div>
+                  <p>{desc} </p>
                 </div>
-                <p>{desc} </p>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
           {/* {err && (
             <div
               className="bg-danger fs-5"

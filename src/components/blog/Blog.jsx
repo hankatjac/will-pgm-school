@@ -9,23 +9,22 @@ import { ProgressBar } from "react-loader-spinner";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const cat = useLocation().search;
   // console.log(cat);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     const fetchData = async () => {
       try {
         const res = await axios.get(`${API_URL}/posts${cat}`);
         setPosts(res.data);
-        setLoading(false);
       } catch (err) {
-        setLoading(false);
         console.log(err);
         alert(err.response.data);
       }
+      setIsLoading(false);
     };
     fetchData();
   }, [cat]);
@@ -35,7 +34,7 @@ const Blog = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-9">
-            {loading ? (
+            {isLoading ? (
               <ProgressBar
                 height="80"
                 width="100%"

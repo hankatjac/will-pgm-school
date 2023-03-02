@@ -11,16 +11,16 @@ import { MdDelete } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
 
 const Single = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
+  // console.log(id);
   // const [post, setPost] = useState({});
   const [readMore, setReadMore] = useState(false);
   const nav = useNavigate();
   // const location = useLocation();
-  const navigate = useNavigate();
+
 
   // const postId = location.pathname.split("/")[2];
   // console.log(location.pathname.split("/"))
-  console.log(id);
   const { currentUser, logout, deletePostImage } = useContext(AuthContext);
 
   // useEffect(() => {
@@ -40,8 +40,8 @@ const Single = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${API_URL}/posts/${id}`);
-      navigate("/posts");
+      await axios.delete(`${API_URL}/posts/${post.id}`);
+      nav("/posts");
     } catch (err) {
       console.log(err);
       if (err.response.status === 401) {
@@ -50,7 +50,6 @@ const Single = () => {
       }
       return;
     }
-
     deletePostImage(post.img);
   };
 
@@ -67,7 +66,7 @@ const Single = () => {
               <div>
                 <Link
                   className="me-3"
-                  to={`/posts/write?edit=${id}`}
+                  to={`/posts/write?edit=${post.id}`}
                   state={post}
                 >
                   <GrEdit
@@ -125,7 +124,7 @@ const Single = () => {
 
         <div className="col-md-3 ms-auto">
           <Sider />
-          <Like cat={post.cat} id={id} />
+          <Like cat={post.cat} id={post.id} />
           {/* <Menu cat={post.cat} /> */}
         </div>
       </div>

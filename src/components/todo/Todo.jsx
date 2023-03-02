@@ -6,9 +6,10 @@ import axios from "axios";
 import { API_URL } from "../../apiPath";
 import { AuthContext } from "../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
+import { ProgressBar } from "react-loader-spinner";
 
 const Todo = () => {
-  
+  const [isLoading, setIsLoading] = useState(false);
   const nav = useNavigate();
   const { logout } = useContext(AuthContext);
   const [showAddTask, setShowAddTask] = useState(false);
@@ -45,6 +46,7 @@ const Todo = () => {
 
   // Fetch Task
   useEffect(() => {
+    setIsLoading(true);
     if (fetch) {
       const fetchData = async () => {
         try {
@@ -52,15 +54,15 @@ const Todo = () => {
           setTasks(res.data);
         } catch (err) {
           // setErr(err.response.data);
-          console.log(err);
-          alert(err.response.data);
           if (err.response.status === 401) {
             logout();
             nav("/login");
           }
-          return;
+          console.log(err);
+          // alert(err.response.data);
         }
         setFetch(false);
+        setIsLoading(false);
       };
       fetchData();
     }
@@ -91,7 +93,6 @@ const Todo = () => {
         nav("/login");
       }
       console.log(err);
-      return;
     }
     setFetch(true);
     // setTasks([...tasks, task]);
@@ -194,7 +195,17 @@ const Todo = () => {
           setShowAddTask={setShowAddTask}
         />
       )}
-      {tasks.length > 0 ? (
+      {isLoading ? (
+        <ProgressBar
+          height="80"
+          width="100%"
+          ariaLabel="progress-bar-loading"
+          wrapperStyle={{}}
+          wrapperClass="progress-bar-wrapper"
+          borderColor="#F4442E"
+          barColor="#51E5FF"
+        />
+      ) : tasks.length > 0 ? (
         <Tasks
           tasks={tasks}
           onDelete={deleteTask}

@@ -13,10 +13,10 @@ const Search = () => {
   // console.log(typeof from);
 
   const [searchedPosts, setSearchedPost] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
+    setIsLoading(true);
     const fetchData = async () => {
       let tempPosts = [];
       try {
@@ -34,14 +34,12 @@ const Search = () => {
             post.title.toLowerCase().includes(from) ||
             post.desc.toLowerCase().includes(from)
         );
-
         setSearchedPost(tempPosts);
-        setLoading(false);
       } catch (err) {
         console.log(err);
         alert(err.response.data);
-        setLoading(false);
       }
+      setIsLoading(false);
     };
     fetchData();
   }, [from]);
@@ -53,7 +51,7 @@ const Search = () => {
       <div className="container">
         <div className="row">
           <div className="col-md-9">
-            {loading ? (
+            {isLoading ? (
               <ProgressBar
                 height="80"
                 width="100%"
@@ -81,12 +79,10 @@ const Search = () => {
                     )}
                   </Link>
                   <p
-                      dangerouslySetInnerHTML={{
-                        __html: DOMPurify.sanitize(
-                          post.desc?.substring(0, 200)
-                        ),
-                      }}
-                    ></p>
+                    dangerouslySetInnerHTML={{
+                      __html: DOMPurify.sanitize(post.desc?.substring(0, 200)),
+                    }}
+                  ></p>
                   {/* <p>{getText(post.desc).substring(0, 200)}</p> */}
                 </div>
               ))
