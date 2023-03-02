@@ -6,13 +6,15 @@ import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
 import { API_URL } from "../apiPath";
+import { ProgressBar } from "react-loader-spinner";
 
 const Footer = () => {
-  
+  const [isLoading, setIsLoading] = useState(false);
   const { t } = useTranslation();
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
       try {
         const res = await axios.get(`${API_URL}/posts`);
@@ -20,6 +22,7 @@ const Footer = () => {
       } catch (err) {
         console.log(err);
       }
+      setIsLoading(false);
     };
     fetchData();
   }, []);
@@ -31,13 +34,30 @@ const Footer = () => {
           <div className="col-md-3">
             <h3>Latest posts</h3>
             <ul className="posts">
-              {blogs.slice(-3).reverse().map((post) => {
-                return (
-                  <li key={post.id}>
-                    <Link to={`/posts/${post.id}`}>{post.title}</Link>
-                  </li>
-                );
-              })}
+              {isLoading ? (
+                <ProgressBar
+                  height="80"
+                  width="100%"
+                  ariaLabel="progress-bar-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="progress-bar-wrapper"
+                  borderColor="#F4442E"
+                  barColor="#51E5FF"
+                />
+              ) : (
+                blogs
+                  .slice(-3)
+                  .reverse()
+                  .map((post) => {
+                    return (
+                      <li key={post.id}>
+                        <Link to={`/posts/${post.id}`} state={post}>
+                          {post.title}
+                        </Link>
+                      </li>
+                    );
+                  })
+              )}
             </ul>
           </div>
 
@@ -47,16 +67,15 @@ const Footer = () => {
               Accusamus iusto odio dignissimos ducimus qui blanditiis
               praesentium
             </p>
-
             <ul className="social-buttons">
               <li>
-                <FaFacebookF color="red"/>
+                <FaFacebookF color="red" />
               </li>
               <li>
                 <FaLinkedinIn color="purple" />
               </li>
               <li>
-                <FaGoogle color="green"/>
+                <FaGoogle color="green" />
               </li>
             </ul>
           </div>
@@ -121,13 +140,15 @@ const Footer = () => {
             <h3>Useful Tools</h3>
             <ul className="posts text-wrap">
               <li>
-                <Link to={"working-hours"} >weekly working-hours calculator</Link>
+                <Link to={"working-hours"}>
+                  weekly working-hours calculator
+                </Link>
               </li>
               <li>
                 <Link to={"todo"}>todo list</Link>
               </li>
               <li>
-              <Link to={"recipe"}>food recipe</Link>
+                <Link to={"recipe"}>food recipe</Link>
               </li>
             </ul>
           </div>

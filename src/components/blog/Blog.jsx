@@ -5,7 +5,6 @@ import Sider from "./Sider";
 import { API_URL } from "../../apiPath";
 import DOMPurify from "dompurify";
 import { ProgressBar } from "react-loader-spinner";
-// import { useNavigate } from "react-router-dom";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);

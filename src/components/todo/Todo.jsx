@@ -46,8 +46,8 @@ const Todo = () => {
 
   // Fetch Task
   useEffect(() => {
-    setIsLoading(true);
     if (fetch) {
+      setIsLoading(true);
       const fetchData = async () => {
         try {
           const res = await axios.get(`${API_URL}/todos`);
@@ -59,7 +59,7 @@ const Todo = () => {
             nav("/login");
           }
           console.log(err);
-          // alert(err.response.data);
+          alert(err.response.data);
         }
         setFetch(false);
         setIsLoading(false);

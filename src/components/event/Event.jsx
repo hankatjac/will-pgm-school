@@ -39,8 +39,8 @@ const Event = () => {
   ]);
 
   useEffect(() => {
-    setIsLoading(true);
     if (fetch) {
+      setIsLoading(true);
       const fetchData = async () => {
         try {
           const res = await axios.get(`${API_URL}/events`);
@@ -78,6 +78,7 @@ const Event = () => {
         logout();
         nav("/login");
       }
+      return
     }
     setfetch(true);
     // console.log("appointment", appointment);
