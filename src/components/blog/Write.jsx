@@ -7,8 +7,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../contexts/authContext";
+import { ColorRing } from "react-loader-spinner";
 
 const Write = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState(null);
   const inputRef = useRef(null);
   const state = useLocation().state;
@@ -68,6 +70,7 @@ const Write = () => {
 
     try {
       if (state) {
+        setIsLoading(true);
         await axios.put(`${API_URL}/posts/${state.id}`, {
           title,
           desc: value,
@@ -76,6 +79,7 @@ const Write = () => {
         });
         file && deletePostImage(state.img);
       } else {
+        setIsLoading(true);
         await axios.post(`${API_URL}/posts/`, {
           title,
           desc: value,
@@ -96,6 +100,7 @@ const Write = () => {
       }
       console.log(err);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -215,13 +220,30 @@ const Write = () => {
                   onChange={(e) => setCat(e.target.value)}
                 />
               </div>
-              <div className="buttons">
-                {/* <button>Save as a draft</button> */}
-                <button type="submit" className="btn btn-primary">
-                  Publish
-                </button>
-                {/* {err && <div className="bg-danger text-center">{err}</div>} */}
-              </div>
+
+              {/* <button>Save as a draft</button> */}
+              <button type="submit" className="btn btn-primary d-block mx-auto">
+                {isLoading ? (
+                  <ColorRing
+                    visible={true}
+                    height="40"
+                    width="40"
+                    ariaLabel="blocks-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="blocks-wrapper"
+                    colors={[
+                      "#e15b64",
+                      "#f47e60",
+                      "#f8b26a",
+                      "#abbd81",
+                      "#849b87",
+                    ]}
+                  />
+                ) : (
+                  "Publish"
+                )}
+              </button>
+              {/* {err && <div className="bg-danger text-center">{err}</div>} */}
             </div>
           </div>
         </Form>
