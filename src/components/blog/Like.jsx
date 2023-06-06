@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { API_URL } from "../../apiPath";
 import { ProgressBar } from "react-loader-spinner";
+import newRequest from "../../utils/newRequest";
 
 const Like = ({ cat, id }) => {
   const [filterPost, setFilterPost] = useState([]);
@@ -12,7 +13,7 @@ const Like = ({ cat, id }) => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${API_URL}/posts/?cat=${cat}`);
+        const res = await newRequest.get(`/posts/?cat=${cat}`);
         let posts = res.data;
         setFilterPost(posts.filter((post) => post.id != id));
       } catch (err) {

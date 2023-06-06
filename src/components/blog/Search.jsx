@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import axios from "axios";
-import { API_URL } from "../../apiPath";
 import Sider from "./Sider";
 import { ProgressBar } from "react-loader-spinner";
 import DOMPurify from "dompurify";
+import newRequest from "../../utils/newRequest";
 
 const Search = () => {
   const location = useLocation();
@@ -20,7 +19,7 @@ const Search = () => {
     const fetchData = async () => {
       let tempPosts = [];
       try {
-        const res = await axios.get(`${API_URL}/posts`);
+        const res = await newRequest.get(`/posts`);
 
         // res.data.forEach((post) => {
         //   // console.log(typeof post.desc);
@@ -73,7 +72,7 @@ const Search = () => {
                     {post.img && (
                       <img
                         className="img-fluid"
-                        src={`${API_URL}/pictures/${post.img}`}
+                        src={`/pictures/${post.img}`}
                         alt=""
                       />
                     )}

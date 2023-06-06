@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Like from "./Like";
-import axios from "axios";
+
 import moment from "moment";
 import DOMPurify from "dompurify";
 import Sider from "./Sider";
 import { AuthContext } from "../../contexts/authContext";
-import { API_URL } from "../../apiPath";
+
 import { MdDelete } from "react-icons/md";
 import { GrEdit } from "react-icons/gr";
+import newRequest from "../../utils/newRequest";
 
 const Single = () => {
   // const { id } = useParams();
@@ -17,7 +18,6 @@ const Single = () => {
   const [readMore, setReadMore] = useState(false);
   const nav = useNavigate();
   // const location = useLocation();
-
 
   // const postId = location.pathname.split("/")[2];
   // console.log(location.pathname.split("/"))
@@ -40,7 +40,7 @@ const Single = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`${API_URL}/posts/${post.id}`);
+      await newRequest.delete(`/posts/${post.id}`);
       nav("/posts");
     } catch (err) {
       console.log(err);
@@ -95,7 +95,7 @@ const Single = () => {
             {post.img && (
               <img
                 className="img-fluid"
-                src={`${API_URL}/pictures/${post?.img}`}
+                src={`/pictures/${post?.img}`}
                 alt=""
               />
             )}

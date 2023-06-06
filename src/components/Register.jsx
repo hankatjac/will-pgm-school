@@ -2,8 +2,8 @@ import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import { API_URL } from "../apiPath";
-import axios from "axios";
+import newRequest from "../utils/newRequest";
+
 
 const Register = () => {
   const { t } = useTranslation();
@@ -25,7 +25,7 @@ const Register = () => {
   const submitForm = async (data) => {
     setMessage("");
     try {
-      await axios.post(`${API_URL}/auth/register`, data);
+      await newRequest.post(`/auth/register`, data);
       navigate("/login");
       setSuccessful(true);
     } catch (err) {
