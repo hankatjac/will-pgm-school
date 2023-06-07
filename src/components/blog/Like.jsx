@@ -1,7 +1,5 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { API_URL } from "../../apiPath";
 import { ProgressBar } from "react-loader-spinner";
 import newRequest from "../../utils/newRequest";
 
@@ -45,7 +43,7 @@ const Like = ({ cat, id }) => {
               {post.img && (
                 <img
                   className="img-fluid"
-                  src={`${API_URL}/pictures/${post?.img}`}
+                  src={`/pictures/${post?.img}`}
                   alt=""
                 />
               )}
