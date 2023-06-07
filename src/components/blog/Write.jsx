@@ -1,12 +1,13 @@
 import React, { useState, useRef, useContext, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { API_URL } from "../../apiPath";
+import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import moment from "moment";
 import Form from "react-bootstrap/Form";
 import { AuthContext } from "../../contexts/authContext";
 import { ColorRing } from "react-loader-spinner";
-import newRequest from "../../utils/newRequest";
 
 const Write = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -45,7 +46,7 @@ const Write = () => {
     try {
       const formData = new FormData();
       formData.append("photo", file);
-      const res = await newRequest.post(`/upload`, formData);
+      const res = await axios.post(`${API_URL}/upload`, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -70,7 +71,7 @@ const Write = () => {
     try {
       if (state) {
         setIsLoading(true);
-        await newRequest.put(`/posts/${state.id}`, {
+        await axios.put(`${API_URL}/posts/${state.id}`, {
           title,
           desc: value,
           cat,
@@ -79,7 +80,7 @@ const Write = () => {
         file && deletePostImage(state.img);
       } else {
         setIsLoading(true);
-        await newRequest.post(`/posts/`, {
+        await axios.post(`${API_URL}/posts/`, {
           title,
           desc: value,
           cat,

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 import { FaFacebookF } from "react-icons/fa";
 import { FaLinkedinIn } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa";
+import { API_URL } from "../apiPath";
 import { ProgressBar } from "react-loader-spinner";
-import newRequest from "../utils/newRequest";
 
 const Footer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +17,7 @@ const Footer = () => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const res = await newRequest.get(`/posts`);
+        const res = await axios.get(`${API_URL}/posts`);
         setBlogs(res.data);
       } catch (err) {
         console.log(err);

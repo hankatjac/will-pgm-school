@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-
+import axios from "axios";
 import Sider from "./Sider";
-
+import { API_URL } from "../../apiPath";
 import DOMPurify from "dompurify";
 import { ProgressBar } from "react-loader-spinner";
-import newRequest from "../../utils/newRequest";
 
 const Blog = () => {
   const [posts, setPosts] = useState([]);
@@ -18,7 +17,7 @@ const Blog = () => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        const res = await newRequest.get(`/posts${cat}`);
+        const res = await axios.get(`${API_URL}/posts${cat}`);
         setPosts(res.data);
       } catch (err) {
         console.log(err);
@@ -59,7 +58,7 @@ const Blog = () => {
                       {post.img && (
                         <img
                           className="img-fluid"
-                          src={`/pictures/${post.img}`}
+                          src={`${API_URL}/pictures/${post.img}`}
                           alt=""
                         />
                       )}
