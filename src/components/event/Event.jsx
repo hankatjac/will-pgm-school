@@ -78,7 +78,7 @@ const Event = () => {
         logout();
         nav("/login");
       }
-      return
+      return;
     }
     setfetch(true);
     // console.log("appointment", appointment);
@@ -155,12 +155,15 @@ const Event = () => {
             events.map((event, index) => {
               const { title, desc, start, end } = event;
               return (
-                <div key={index}>
+                <div className="card mb-2" key={index}>
                   {" "}
-                  <h2>
-                    <a href="#">{title}</a>
-                  </h2>
-                  <div className="metadata">
+                  <div className="card-body">
+                    <h2 className="card-title">
+                      <a href="#">{title}</a>
+                    </h2>
+                    <p className="card-text">{desc} </p>
+                  </div>
+                  <div class="card-footer text-muted">
                     <time>
                       Start{" "}
                       <span>{moment(start).format("YYYY-MM-DD HH:mm")}</span>
@@ -169,7 +172,6 @@ const Event = () => {
                       End <span>{moment(end).format("YYYY-MM-DD HH:mm")}</span>
                     </time>
                   </div>
-                  <p>{desc} </p>
                 </div>
               );
             })
