@@ -163,7 +163,7 @@ const Event = () => {
                     </h2>
                     <p className="card-text">{desc} </p>
                   </div>
-                  <div class="card-footer text-muted">
+                  <div className="card-footer text-muted">
                     <time>
                       Start{" "}
                       <span>{moment(start).format("YYYY-MM-DD HH:mm")}</span>
